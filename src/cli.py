@@ -1,21 +1,10 @@
-"""
-Work wants an inventory app that:
-    Stores data into a file 
-    uses the commad line to list add/update/ delete:
-        "items" they have:
-            id
-            name
-            conditions
-            bnous: checked in
-"""
-from models.item import Item # And Import Statement to make code from other files available
 
+from models.item import Item # And Import Statement to make code from other files available
 
 next_id = 0
 items = [] # this will be used to store items 
 # TODO Make a menu print out showing options
 def menu(): # prints the menu option for the user
-
     print ("""
 1.List all items
 2.add new item
@@ -29,9 +18,8 @@ def menu(): # prints the menu option for the user
 def list_items(): # Writes all items to the terminal
     for item in items:
         print(item)
-    # print("in list itme function")
 
-# #add new item
+#add new item
 
 def new_item(): # gets user input for all need fields for an Item
     global next_id # allows us access to the next_id number
@@ -39,15 +27,11 @@ def new_item(): # gets user input for all need fields for an Item
     name = input("Name:")
     cond = input("Condition: ")
     item_id = next_id # uses the global counter to give a unique id to each item
-
     next_id += 1 # updates id with new value so next one is 1 more
 
 # This is the class -> Item from the other file we imported 
-    tmp = Item(item_id, name, cond) # Builds an item/stores it in tmp
-    
+    tmp = Item(item_id, name, cond) # Builds an item/stores it in tmp 
     items.append(tmp) # adds item to global items array
-
-
 
 # 3.update exisitng item
 
@@ -61,16 +45,12 @@ def update_existing():
     except Exception:
         print("not a valid number")
         return
-    #found_item = False
     for item in items:
-    #for i in enumerate(items):
+
         if item.item_id == item_id_to_update:
-           # name =
-           # cond = 
             item.name = input("Name: ")
             item.condition =input("Condition: ") 
-            # found_item = True
-            # item_to_update = item
+           
             break
     #if found_item:   
     else:
@@ -81,9 +61,25 @@ def update_existing():
 
 def delete_item():
     print("inside del item")
+    if not items:
+        print("You have no items to delete")
+        return
+    list_items()
+    try:
+        item_id_to_delete = int(input("What is the item you wish to update\n>"))
+    except Exception:
+        print("not a valid number")
+        return
 
-
-# Make the menu questions that grab the data
+    for index, item in enumerate(items):
+        if item.item_id == item_id_to_delete:
+            index_to_remove = index
+            break
+        else:
+            print("We don't find a match")
+            return
+        removed_item = items,pop(index_to_remove)
+        print(f"Found: \n {items.pop(index_to_remove)}")
 
 def main():  # Starts the Program off, holds the loop until exit.
     while True:
@@ -108,11 +104,3 @@ def main():  # Starts the Program off, holds the loop until exit.
 
 if __name__ == "__main__":
     main()
-
-
-# Make the File saving stuff
-# # try:
-    #     choice = int(input("> "))
-    # except Exception:
-    #     input("Invalid Input, give a number\n(Press enter to try agian)")
-        # continue
