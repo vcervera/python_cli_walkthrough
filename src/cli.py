@@ -51,14 +51,36 @@ def new_item(): # gets user input for all need fields for an Item
 
 # 3.update exisitng item
 
-def update_existing(itemId):
-    pass
+def update_existing():
+    if not items:
+        print("You have not items to update")
+        return
+    list_items()
+    try:
+        item_id_to_update = int(input("What is the item you wish to update\n>"))
+    except Exception:
+        print("not a valid number")
+        return
+    #found_item = False
+    for item in items:
+    #for i in enumerate(items):
+        if item.item_id == item_id_to_update:
+           # name =
+           # cond = 
+            item.name = input("Name: ")
+            item.condition =input("Condition: ") 
+            # found_item = True
+            # item_to_update = item
+            break
+    #if found_item:   
+    else:
+        print("We didn't find a match")
 
 
 # 4.delete item (by item id)
 
-def delete_item(itemId):
-    pass
+def delete_item():
+    print("inside del item")
 
 
 # Make the menu questions that grab the data
@@ -74,9 +96,9 @@ def main():  # Starts the Program off, holds the loop until exit.
         elif choice == "2":
             new_item()
         elif choice == "3":
-            pass
+            update_existing()
         elif choice == "4":
-            pass
+            delete_item()
         elif choice == "5": # Exit
             exit()
         else:  # User gave us bad input we let them know then loop again.
